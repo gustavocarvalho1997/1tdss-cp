@@ -1,14 +1,17 @@
+from csv_1 import load_users_from_csv, save_users_to_csv
+
 users = {}
 
 while True:
+    recuperando = load_users_from_csv('users.csv')
+    users = recuperando
     print("\nUser Manager:")
     print("1. Add user")
     print("2. Remove user")
     print("3. List all users")
     print("4. Search user by email")
     print("5. Exit")
-    
-    choice = "5"
+    choice = input("Enter your choice: ")
 
     if choice == "1":
         name = input("Enter name: ")
@@ -19,6 +22,7 @@ while True:
         else:
             users[email] = name
             print(f"{name} added successfully!")
+            save_users_to_csv('users.csv', users)
 
     elif choice == "2":
         email = input("Enter email to remove: ")
@@ -26,6 +30,7 @@ while True:
         if email in users:
             del users[email]
             print(f"User with email {email} removed successfully!")
+            save_users_to_csv('users.csv', users)
         else:
             print("User not found.")
 
